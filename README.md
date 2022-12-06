@@ -2,7 +2,7 @@
 
 # Overview
 
-This is code to reproduce the experiments in the paper: 
+This is the code to reproduce the experiments in the paper: 
 
 **L. Carlone, Estimation Contracts for Outlier-Robust Geometric Perception, [arXiv: 2208.10521](https://arxiv.org/pdf/2208.10521.pdf), 2022.**
 
@@ -22,7 +22,7 @@ After installing the dependencies and cloning this repo, the folder where you in
 - estimation-contracts
 - SOSTOOLS
 
-## Running the code
+# Running the code
 
 You can replicate the experiments in the paper by running each of the following experiments:
 - **experiment1_aposteriori_bounds_synthetic**: solves synthetic rotation search problems using [QUASAR](https://arxiv.org/pdf/1905.12536.pdf) and compares the estimation errors with the a posteriori bound developed in our paper (Fig. 4 in the paper)
@@ -33,15 +33,15 @@ You can replicate the experiments in the paper by running each of the following 
 - **experiment6_check_anticoncentration_synthetic_vs_n**: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper)
 - **experiment7_check_anticoncentration_synthetic_vs_eta**: check certifiable anti-concentration in synthetic rotation search problems for different values of the parameter $\eta$ (Fig. 8(a) and 8(c) in the paper)
 - **experiment8_slide_synthetic**: evaluates SLIDE for list decodable regression in synthetic rotation search problems, which obtains:
--- Fig. 9 when the parameter ``isAdversarial = 0'' and ``recoverAllHypotheses = 0''
--- Fig. 10 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 0''
--- Fig. 11 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1''
--- Fig. 12 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1'' (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
+  -- Fig. 9 when the parameter ``isAdversarial = 0'' and ``recoverAllHypotheses = 0''
+  -- Fig. 10 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 0''
+  -- Fig. 11 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1''
+  -- Fig. 12 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1'' (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
 - **experiment9_check_anticoncentration_real**: check certifiable anti-concentration in real rotation search problems arising in panorama stitching (not reported in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
 
 The results we obtained by running the examples above are also stored in the **results** folder within this repo.
 
-## Reference
+# Reference
 
 If you found the paper or code useful, please cite:
 
@@ -50,18 +50,17 @@ If you found the paper or code useful, please cite:
   author = {L. Carlone},
   title = {Estimation Contracts for Outlier-Robust Geometric Perception},
   journal = {arXiv preprint arXiv: 2208.10521},
-  note = {\linkToPdf{https://arxiv.org/pdf/2208.10521.pdf}},
   pdf = {https://arxiv.org/pdf/2208.10521.pdf},
   Year = {2022}
 }
 ```
 
-## Acknowledgments
+# Acknowledgments
 
 This work was partially funded by the NSF CAREER award [Certifiable Perception for Autonomous Cyber-Physical
 Systems](https://nsf.gov/awardsearch/showAward?AWD_ID=2044973) and by ARL [DCIST](https://www.dcist.org/) CRA W911NF-17- 2-0181.
 
-## License
+# License
 
 [BSD License](LICENSE.BSD)
 
