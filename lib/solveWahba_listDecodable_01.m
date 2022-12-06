@@ -30,6 +30,8 @@ unitTest(R_gt,problem.theta_gt(:),N,alpha,v1,v2,betasq,A,b,Aalpha,balpha,isAdver
 offset = N+1; % shortcut to access part of the moment matrix
 q_ind = [1:4]+offset;
 
+tstart = tic;
+    
 %% solve relaxation
 cvx_begin % sdp
 cvx_solver mosek
@@ -79,9 +81,12 @@ if isnan(f_sdp)==1
 end
 
 %% Compute relaxation gap
-f_est   = sqrt(alpha*N); % optimal cost of original problem is always norm of w and w has apha*N nonzero entries = 1 
+f_est   = sqrt(alpha*N); % optimal cost of original problem (with simple norm) is always norm of w and w has apha*N nonzero entries = 1 
 subopt  = abs(f_est - f_sdp) / (1+abs(f_est)+abs(f_sdp));
-eta = subopt;
+eta_norm = subopt;
+
+% optimal cost of original problem (with squared norm) is always alpha n 
+eta  = abs(f_est^2 - f_sdp^2) / (1+abs(f_est^2)+abs(f_sdp^2));
 
 %% Rounding (similar to Algorith 5 in the estimation contracts paper,
 % but solution is also normalized here
@@ -116,6 +121,8 @@ for i=1:K
     qi = q_list(:,i);
     R_est_list(:,:,i) = quat2rot(qi);
 end
+
+timeSLIDE = toc(tstart);
 
 %% case of multiple objects in the data
 % visualize

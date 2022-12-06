@@ -65,13 +65,12 @@ for i=1:length(inliersIds)
     ind = inliersIds(i);
     normsq_Ai_v(i) = sum( (At(:,:,ind) * v ).^2 ); % ||Ai' v||^2 
     
-    %% check for all x, || Ai' v ||^2 <= delta  sosimply  (p(|| Ai' v ||)-1)^2 <= delta
+    %% check anti-concentration -- condition 1:
     %p(i) = 1 + c2 * normsq_Ai_v(i) + c4 * normsq_Ai_v(i)^2; % c0 = 1 (by definition)
     p(i) = 1 + c2 * normsq_Ai_v(i);
-    pi_m1_sq = (p(i)-1)^2; % degree 4
     
     tstart = tic;
-    [gam1,vars,opt] = findbound( delta^2-pi_m1_sq, [delta^2-normsq_Ai_v(i)],[],degree);
+    [gam1,vars,opt] = findbound( p(i)^2 - (1-delta)^2, [delta^2-normsq_Ai_v(i)],[],degree);
     timeTest1 = timeTest1+toc(tstart);
     nrRuns = nrRuns + 1;
     if gam1 < 0

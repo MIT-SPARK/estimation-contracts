@@ -12,8 +12,8 @@ addSpecificPaths
 
 %% set parameters for Monte Carlo runs
 Nset = [50] % number of measurements
-outrateSet = [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]; % outlier rate
-nrTests = 10; % number of runs for each configuration
+outrateSet = 0.5%  [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]; % outlier rate
+nrTests = 1; % number of runs for each configuration
 isAdversarial = 0; recoverAllHypotheses = 0; % Fig. 9
 % isAdversarial = 1; recoverAllHypotheses = 0; % Fig. 10
 % isAdversarial = 1; recoverAllHypotheses = 1; % Fig. 10
