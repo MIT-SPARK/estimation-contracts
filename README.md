@@ -2,8 +2,9 @@
 
 # Overview
 
-This is code to reproduce the experiments in the paper: L. Carlone, [**Estimation Contracts for Outlier-Robust 
-Geometric Perception**], [arXiv: 2208.10521](https://arxiv.org/pdf/2208.10521.pdf), 2022].
+This is code to reproduce the experiments in the paper: 
+
+L. Carlone, [**Estimation Contracts for Outlier-Robust Geometric Perception**], [arXiv: 2208.10521](https://arxiv.org/pdf/2208.10521.pdf), 2022.
 
 # Getting started
 
@@ -11,12 +12,33 @@ The code has been implemented and tested in Matlab R2020a, using a Macbook Pro w
 
 To run the code, please install the following dependencies. Note: it is important to install all the dependencies in the same folder (e.g., all subfolders of a ``code'' folder) 
 - [CVX with MOSEK](http://cvxr.com/cvx/doc/mosek.html) (tested with CVX Version 2.2)
-- [STRIDE and the Certifiably Robust Perception repository](https://github.com/MIT-SPARK/CertifiablyRobustPerception/) (tested with latest commit on December 10, 2022)
+- [STRIDE and the Certifiably Robust Perception repository](https://github.com/MIT-SPARK/CertifiablyRobustPerception/) (tested with latest commit, December 10, 2022)
 - [SOSTOOLS](https://github.com/oxfordcontrol/SOSTOOLS) (tested with Version 3.01)
 
 Clone this repo in the same folder as the other dependencies. 
-After installing the dependencies and cloning this repo, the folder where you installed the dependencies should look like this:
--
+After installing the dependencies and cloning this repo, the folder where you installed the dependencies in should at least have the following sub-folders:
+- CertifiablyRobustPerception
+- cvx
+- estimation-contracts
+- SOSTOOLS
+
+## Running the code
+
+You can replicate the experiments in the paper by running each of the following experiments:
+- experiment1_aposteriori_bounds_synthetic: solves synthetic rotation search problems using [QUASAR](https://arxiv.org/pdf/1905.12536.pdf) and compares the estimation errors with the a posteriori bound developed in our paper (Fig. 4 in the paper)
+- experiment2_check_hypercontractivity_synthetic: check certifiable hypercontractivity in synthetic rotation search problems (Fig. 5 in the paper)
+- experiment3_check_hypercontractivity_real: check certifiable hypercontractivity in real rotation search problems arising in panorama stitching (Table 1 in the paper)
+- experiment4_hypercontractivity_bounds: visualizes the bounds in Theorem 11 (Fig. 6 in the paper)
+- experiment5_visualize_anticoncentration: visualizes the functions involved in the definition of certifiable anti-concentration (Fig. 7 in the paper)
+- experiment6_check_anticoncentration_synthetic_vs_n: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper)
+- experiment7_check_anticoncentration_synthetic_vs_eta: check certifiable anti-concentration in synthetic rotation search problems for different values of the parameter $\eta$ (Fig. 8(a) and 8(c) in the paper)
+- experiment8_slide_synthetic: evaluates SLIDE for list decodable regression in synthetic rotation search problems, which obtains:
+-- Fig. 9 when the parameter ``isAdversarial = 0'' and ``recoverAllHypotheses = 0''
+-- Fig. 10 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 0''
+-- Fig. 11 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1''
+-- Fig. 12 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1'' (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
+
+The results we obtained by running the examples above are also stored in the [**results**] folder within this repo.
 
 ## Reference
 
