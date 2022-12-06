@@ -10,7 +10,7 @@ This is the code to reproduce the experiments in the paper:
 
 The code has been implemented and tested in Matlab R2020a, using a Macbook Pro with maxOS Monterey. We expect it to run on any other operating system supporting the dependencies below.
 
-To run the code, please install the following dependencies. Note: it is important to install all the dependencies in the same folder (e.g., all subfolders of a ``code'' folder):
+To run the code, please install the following dependencies. Note: it is important to install all the dependencies in the same folder (e.g., all subfolders of a ``code`` folder):
 - [CVX with MOSEK](http://cvxr.com/cvx/doc/mosek.html) (tested with CVX Version 2.2)
 - [STRIDE and the Certifiably Robust Perception repository](https://github.com/MIT-SPARK/CertifiablyRobustPerception/) (tested with latest commit, December 10, 2022)
 - [SOSTOOLS](https://github.com/oxfordcontrol/SOSTOOLS) (tested with Version 3.01)
@@ -33,10 +33,10 @@ You can replicate the experiments in the paper by running each of the following 
 * **experiment6_check_anticoncentration_synthetic_vs_n**: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper)
 * **experiment7_check_anticoncentration_synthetic_vs_eta**: check certifiable anti-concentration in synthetic rotation search problems for different values of the parameter $\eta$ (Fig. 8(a) and 8(c) in the paper)
 * **experiment8_slide_synthetic**: evaluates SLIDE for list decodable regression in synthetic rotation search problems, which obtains:
-  * Fig. 9 when the parameter ``isAdversarial = 0'' and ``recoverAllHypotheses = 0''
-  * Fig. 10 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 0''
-  * Fig. 11 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1''
-  * Fig. 12 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1'' (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
+  * Fig. 9 when the parameter ``isAdversarial = 0`` and ``recoverAllHypotheses = 0``
+  * Fig. 10 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 0``
+  * Fig. 11 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 1``
+  * Fig. 12 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 1`` (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
 * **experiment9_check_anticoncentration_real**: check certifiable anti-concentration in real rotation search problems arising in panorama stitching (not reported in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
 
 The results we obtained by running the examples above are also stored in the **results** folder within this repo.
