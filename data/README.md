@@ -1,6 +1,6 @@
 # data folder
 
-This folder is designed to contain the data for the panorama stitching experiments in the paper "Estimation Contracts for Outlier-Robust Geometric Perception". Please download the data from: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing).
+This folder is designed to contain the data for the panorama stitching experiments in the paper **Estimation Contracts for Outlier-Robust Geometric Perception**. Please download the data from: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing).
 
 After downloading the data, this folder should look like this:
 

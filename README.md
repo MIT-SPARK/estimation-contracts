@@ -27,7 +27,7 @@ After installing the dependencies and cloning this repo, the folder where you in
 You can replicate the experiments in the paper by running each of the following experiments:
 - **experiment1_aposteriori_bounds_synthetic**: solves synthetic rotation search problems using [QUASAR](https://arxiv.org/pdf/1905.12536.pdf) and compares the estimation errors with the a posteriori bound developed in our paper (Fig. 4 in the paper)
 - **experiment2_check_hypercontractivity_synthetic**: check certifiable hypercontractivity in synthetic rotation search problems (Fig. 5 in the paper)
-- **experiment3_check_hypercontractivity_real**: check certifiable hypercontractivity in real rotation search problems arising in panorama stitching (Table 1 in the paper)
+- **experiment3_check_hypercontractivity_real**: check certifiable hypercontractivity in real rotation search problems arising in panorama stitching (Table 1 in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
 - **experiment4_hypercontractivity_bounds**: visualizes the bounds in Theorem 11 (Fig. 6 in the paper)
 - **experiment5_visualize_anticoncentration**: visualizes the functions involved in the definition of certifiable anti-concentration (Fig. 7 in the paper)
 - **experiment6_check_anticoncentration_synthetic_vs_n**: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper)
@@ -37,7 +37,7 @@ You can replicate the experiments in the paper by running each of the following 
 -- Fig. 10 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 0''
 -- Fig. 11 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1''
 -- Fig. 12 when the parameter ``isAdversarial = 1'' and ``recoverAllHypotheses = 1'' (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
-- **experiment9_check_anticoncentration_real**: check certifiable anti-concentration in real rotation search problems arising in panorama stitching (not reported in the paper).
+- **experiment9_check_anticoncentration_real**: check certifiable anti-concentration in real rotation search problems arising in panorama stitching (not reported in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
 
 The results we obtained by running the examples above are also stored in the **results** folder within this repo.
 
