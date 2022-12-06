@@ -69,18 +69,17 @@ for i=1:length(inliersIds)
     %p(i) = 1 + c2 * normsq_Ai_v(i) + c4 * normsq_Ai_v(i)^2; % c0 = 1 (by definition)
     p(i) = 1 + c2 * normsq_Ai_v(i);
     pi_m1_sq = (p(i)-1)^2; % degree 4
-    if i == 1
-        tstart = tic;
-        [gam1,vars,opt] = findbound( delta^2-pi_m1_sq, [delta^2-normsq_Ai_v(i)],[],degree);
-        timeTest1 = timeTest1+toc(tstart);
-        nrRuns = nrRuns + 1;
-        if gam1 < 0
-            isAntiConcentrated = 0;
-            warning('found an Ai that is not anti-concentrated (condition 1')
-        end
-        gam1
-        warning('remove i==1 if')
+    
+    tstart = tic;
+    [gam1,vars,opt] = findbound( delta^2-pi_m1_sq, [delta^2-normsq_Ai_v(i)],[],degree);
+    timeTest1 = timeTest1+toc(tstart);
+    nrRuns = nrRuns + 1;
+    if gam1 < 0
+        isAntiConcentrated = 0;
+        warning('found an Ai that is not anti-concentrated (condition 1')
     end
+    gam1
+    warning('remove i==1 if')
     
     A = [ A;At(:,:,ind) ];
 end

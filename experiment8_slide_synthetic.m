@@ -11,14 +11,15 @@ restoredefaultpath
 addSpecificPaths
 
 %% set parameters for Monte Carlo runs
-Nset = [200] % number of measurements
+Nset = [50] % number of measurements
 outrateSet = [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]; % outlier rate
 nrTests = 10; % number of runs for each configuration
-isAdversarial = 1;
-recoverAllHypotheses = 1;
+isAdversarial = 0; recoverAllHypotheses = 0; % Fig. 9
+% isAdversarial = 1; recoverAllHypotheses = 0; % Fig. 10
+% isAdversarial = 1; recoverAllHypotheses = 1; % Fig. 10
 doPlotRotations = 0;
 
-%% parameters to visualize rotations our of SLIDE
+%% parameters to visualize rotations out of SLIDE (Fig. 12)
 % Nset = [50] % number of measurements
 % outrateSet = 0.8 % [0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0]; % outlier rate
 % nrTests = 1; % number of runs for each configuration
@@ -33,12 +34,14 @@ results_TLS_R_err_ang_deg_obj2 = zeros(length(Nset),length(outrateSet),nrTests);
 results_TLS_R_err_diff_norm_obj2 = zeros(length(Nset),length(outrateSet),nrTests); 
 results_TLS_fsdp = zeros(length(Nset),length(outrateSet),nrTests); 
 
-results_LDR_R_err_ang_deg_obj1 = zeros(length(Nset),length(outrateSet),nrTests); 
-results_LDR_R_err_diff_norm_obj1 = zeros(length(Nset),length(outrateSet),nrTests); 
-results_LDR_eta = zeros(length(Nset),length(outrateSet),nrTests); 
-results_LDR_R_err_ang_deg_obj2 = zeros(length(Nset),length(outrateSet),nrTests);
-results_LDR_R_err_diff_norm_obj2 = zeros(length(Nset),length(outrateSet),nrTests); 
-results_LDR_fsdp = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_R_err_ang_deg_obj1 = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_R_err_diff_norm_obj1 = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_eta_norm = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_eta = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_R_err_ang_deg_obj2 = zeros(length(Nset),length(outrateSet),nrTests);
+results_SLIDE_R_err_diff_norm_obj2 = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_fsdp = zeros(length(Nset),length(outrateSet),nrTests); 
+results_SLIDE_time = zeros(length(Nset),length(outrateSet),nrTests); 
 
 %% generate random problems and test certifiable hyper-contractivity
 for ind_N = 1:length(Nset) % general, but we test for a single N here
@@ -57,9 +60,6 @@ for ind_N = 1:length(Nset) % general, but we test for a single N here
 
             %% Different TLS formulation, for testing
             solveWahba_TLS_m1p1
-            % solveWahba_TLS_m1p1_extended %% broken
-            % solveWahba_TLS_01
-            % solveWahba_TLS_01_extended
             
             %% store results single hypotheses
             results_TLS_fsdp(ind_N,ind_outrate,test) = f_sdp;
@@ -87,21 +87,23 @@ for ind_N = 1:length(Nset) % general, but we test for a single N here
             solveWahba_listDecodable_01
             
             %% store results list decodable
-            results_LDR_fsdp(ind_N,ind_outrate,test) = f_sdp;
-            results_LDR_R_err_ang_deg_obj1(ind_N,ind_outrate,test) = R_err;
+            results_SLIDE_time(ind_N,ind_outrate,test) = timeSLIDE;
+            results_SLIDE_fsdp(ind_N,ind_outrate,test) = f_sdp;
+            results_SLIDE_R_err_ang_deg_obj1(ind_N,ind_outrate,test) = R_err;
             R_err_diff_norm = norm( R_gt(:) - R_est(:) );
-            results_LDR_R_err_diff_norm_obj1(ind_N,ind_outrate,test) = R_err_diff_norm;
+            results_SLIDE_R_err_diff_norm_obj1(ind_N,ind_outrate,test) = R_err_diff_norm;
             if R_err_diff_norm > 2*sqrt(3)
                 R_err_diff_norm
                 error('error exceeds trivial upper bound?')
             end
-            results_LDR_eta(ind_N,ind_outrate,test) = eta;
+            results_SLIDE_eta_norm(ind_N,ind_outrate,test) = eta_norm;
+            results_SLIDE_eta(ind_N,ind_outrate,test) = eta;
             fprintf('+++ eta=%g +++\n',eta)
             fprintf('+++ SLIDE obj 1: rot err =%.3g [deg], norm error=%.3g +++\n',R_err,R_err_diff_norm)
             if isAdversarial > 0
                 assert(isnan(R_err) || abs( R_err - min(R_err_rot_deg_list(:,1)) )<1e-7 )
-                results_LDR_R_err_ang_deg_obj2(ind_N,ind_outrate,test) = min(R_err_rot_deg_list(:,2));
-                results_LDR_R_err_diff_norm_obj2(ind_N,ind_outrate,test) = min(R_err_norm_list(:,2));
+                results_SLIDE_R_err_ang_deg_obj2(ind_N,ind_outrate,test) = min(R_err_rot_deg_list(:,2));
+                results_SLIDE_R_err_diff_norm_obj2(ind_N,ind_outrate,test) = min(R_err_norm_list(:,2));
                 fprintf('+++ SLIDE obj 2: rot err =%.3g [deg], norm error=%.3g +++\n',min(R_err_rot_deg_list(:,2)),min(R_err_norm_list(:,2)))
             end  
             
@@ -113,14 +115,14 @@ for ind_N = 1:length(Nset) % general, but we test for a single N here
     end
 end
 
-% save log_results_experiment7_isAdversarial_true_recoverAll
+% save log_results_experiment8_isAdversarial_0_recoverAll_0
  
 %% plots
-clear all 
-close all
-clc
-load log_results_experiment7_isAdversarial_true
-s = [1:length(outrateSet)]; % [2:length(outrateSet)-1] % discard 0% and 100% outliers
+% clear all 
+% close all
+% clc
+% load log_results_experiment7_isAdversarial_true
+s = [1:length(outrateSet)]; 
 outrateSet = outrateSet(s);
 margin = 0.02;
 
@@ -135,26 +137,27 @@ results_TLS_R_err_ang_deg_obj2 = results_TLS_R_err_ang_deg_obj2(s,:);
 results_TLS_R_err_diff_norm_obj2 = squeeze(results_TLS_R_err_diff_norm_obj2);
 results_TLS_R_err_diff_norm_obj2 = results_TLS_R_err_diff_norm_obj2(s,:);
 
-results_LDR_R_err_ang_deg_obj1 = squeeze(results_LDR_R_err_ang_deg_obj1); 
-results_LDR_R_err_ang_deg_obj1 = results_LDR_R_err_ang_deg_obj1(s,:);
-results_LDR_R_err_diff_norm_obj1 = squeeze(results_LDR_R_err_diff_norm_obj1);
-results_LDR_R_err_diff_norm_obj1 = results_LDR_R_err_diff_norm_obj1(s,:);
-results_LDR_eta = squeeze(results_LDR_eta);
-results_LDR_eta = results_LDR_eta(s,:);
-results_LDR_R_err_ang_deg_obj2 = squeeze(results_LDR_R_err_ang_deg_obj2);
-results_LDR_R_err_ang_deg_obj2 = results_LDR_R_err_ang_deg_obj2(s,:);
-results_LDR_R_err_diff_norm_obj2 = squeeze(results_LDR_R_err_diff_norm_obj2);
-results_LDR_R_err_diff_norm_obj2 = results_LDR_R_err_diff_norm_obj2(s,:);
+results_SLIDE_R_err_ang_deg_obj1 = squeeze(results_SLIDE_R_err_ang_deg_obj1); 
+results_SLIDE_R_err_ang_deg_obj1 = results_SLIDE_R_err_ang_deg_obj1(s,:);
+results_SLIDE_R_err_diff_norm_obj1 = squeeze(results_SLIDE_R_err_diff_norm_obj1);
+results_SLIDE_R_err_diff_norm_obj1 = results_SLIDE_R_err_diff_norm_obj1(s,:);
+results_SLIDE_eta = squeeze(results_SLIDE_eta);
+results_SLIDE_eta = results_SLIDE_eta(s,:);
+results_SLIDE_R_err_ang_deg_obj2 = squeeze(results_SLIDE_R_err_ang_deg_obj2);
+results_SLIDE_R_err_ang_deg_obj2 = results_SLIDE_R_err_ang_deg_obj2(s,:);
+results_SLIDE_R_err_diff_norm_obj2 = squeeze(results_SLIDE_R_err_diff_norm_obj2);
+results_SLIDE_R_err_diff_norm_obj2 = results_SLIDE_R_err_diff_norm_obj2(s,:);
+results_SLIDE_time = squeeze(results_SLIDE_time);
 
 % plot errors (norm of difference)
 figure
 plot(outrateSet, mean(results_TLS_R_err_diff_norm_obj1,2) ,'-b','linewidth',4);
 hold on; grid on
-plot(outrateSet, mean(results_LDR_R_err_diff_norm_obj1,2) ,'-r','linewidth',4);
+plot(outrateSet, mean(results_SLIDE_R_err_diff_norm_obj1,2) ,'-r','linewidth',4);
 plot_distribution_prctile(outrateSet,results_TLS_R_err_diff_norm_obj1','color',[0 0 1],'Prctile',[25 50 75 90]);
-plot_distribution_prctile(outrateSet,results_LDR_R_err_diff_norm_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
+plot_distribution_prctile(outrateSet,results_SLIDE_R_err_diff_norm_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
 plot(outrateSet, mean(results_TLS_R_err_diff_norm_obj1,2) ,'-b','linewidth',4);
-plot(outrateSet, mean(results_LDR_R_err_diff_norm_obj1,2) ,'-r','linewidth',4);
+plot(outrateSet, mean(results_SLIDE_R_err_diff_norm_obj1,2) ,'-r','linewidth',4);
 % plot(outrateSet,2*sqrt(3) * ones(size(outrateSet)),'-.k','linewidth',4);
 xlabel('Outlier rate ($\beta$)','interpreter','latex')
 ylabel('Estimation error ($\|x-x^\circ\|_2$)','interpreter','latex')
@@ -168,11 +171,11 @@ yl = ylim; ylim([-0.05*(yl(2)-yl(1)) yl(2)])
 figure
 plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
 hold on; grid on
-plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
+plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
 plot_distribution_prctile(outrateSet,results_TLS_R_err_ang_deg_obj1','color',[0 0 1],'Prctile',[25 50 75 90]);
-plot_distribution_prctile(outrateSet,results_LDR_R_err_ang_deg_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
+plot_distribution_prctile(outrateSet,results_SLIDE_R_err_ang_deg_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
 plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
-plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
+plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
 xlabel('Outlier rate ($\beta$)','interpreter','latex')
 ylabel('Rotation error [deg]','interpreter','latex')
 legend('TLS','SLIDE','Location', 'northwest')
@@ -184,11 +187,11 @@ yl = ylim; ylim([-0.05*(yl(2)-yl(1)) yl(2)])
 figure
 semilogy(outrateSet, mean(results_TLS_eta,2) ,'-b','linewidth',4);
 hold on;
-semilogy(outrateSet, mean(results_LDR_eta,2) ,'-r','linewidth',4);
+semilogy(outrateSet, mean(results_SLIDE_eta,2) ,'-r','linewidth',4);
 plot_distribution_prctile(outrateSet,results_TLS_eta','color',[0 0 1],'Prctile',[25 50 75 90]);
-plot_distribution_prctile(outrateSet,results_LDR_eta','color',[1 0 0],'Prctile',[25 50 75 90]);
+plot_distribution_prctile(outrateSet,results_SLIDE_eta','color',[1 0 0],'Prctile',[25 50 75 90]);
 semilogy(outrateSet, mean(results_TLS_eta,2) ,'-b','linewidth',4);
-semilogy(outrateSet, mean(results_LDR_eta,2) ,'-r','linewidth',4);
+semilogy(outrateSet, mean(results_SLIDE_eta,2) ,'-r','linewidth',4);
 xlabel('Outlier rate ($\beta$)','interpreter','latex')
 ylabel('Relaxation gap','interpreter','latex')
 legend('TLS','SLIDE','Location', 'Best')
@@ -203,14 +206,14 @@ if isAdversarial
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
         hold on; grid on
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj2,2) ,':b','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
-        plot_distribution_prctile(outrateSet(5:end),results_LDR_R_err_ang_deg_obj2(5:end,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
-        plot_distribution_prctile(outrateSet(1:5),results_LDR_R_err_ang_deg_obj2(1:5,:)','color',[0.5 0.5 0.5],'Prctile',[25 50 75 90]);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
+        plot_distribution_prctile(outrateSet(5:end),results_SLIDE_R_err_ang_deg_obj2(5:end,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
+        plot_distribution_prctile(outrateSet(1:5),results_SLIDE_R_err_ang_deg_obj2(1:5,:)','color',[0.5 0.5 0.5],'Prctile',[25 50 75 90]);
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj2,2) ,':b','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
         xlabel('Outlier rate ($\beta$)','interpreter','latex')
         ylabel('Rotation error [deg]','interpreter','latex')
         legend('TLS - rotation 1','TLS - rotation 2','SLIDE - rotation 1','SLIDE - rotation 2','Location', 'best')
@@ -224,15 +227,15 @@ if isAdversarial
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
         hold on; grid on
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj2,2) ,':b','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
-        plot_distribution_prctile(outrateSet(5:end),results_LDR_R_err_ang_deg_obj2(5:end,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
-        plot_distribution_prctile(outrateSet(1:5),results_LDR_R_err_ang_deg_obj2(1:5,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
-        plot_distribution_prctile(outrateSet,results_LDR_R_err_ang_deg_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
+        plot_distribution_prctile(outrateSet(5:end),results_SLIDE_R_err_ang_deg_obj2(5:end,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
+        plot_distribution_prctile(outrateSet(1:5),results_SLIDE_R_err_ang_deg_obj2(1:5,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
+        plot_distribution_prctile(outrateSet,results_SLIDE_R_err_ang_deg_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj2,2) ,':b','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
-        plot(outrateSet, mean(results_LDR_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
+        plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
         xlabel('Outlier rate ($\beta$)','interpreter','latex')
         ylabel('Rotation error [deg]','interpreter','latex')
         legend('TLS - rotation 1','TLS - rotation 2','SLIDE - rotation 1','SLIDE - rotation 2','Location', 'best')
