@@ -78,7 +78,6 @@ for i=1:length(inliersIds)
         warning('found an Ai that is not anti-concentrated (condition 1')
     end
     gam1
-    warning('remove i==1 if')
     
     A = [ A;At(:,:,ind) ];
 end
