@@ -60,7 +60,7 @@ aveRuntime2 = mean(runtime2,3);
 aveAveRuntime1 = mean(runtime1(:)) % overall average
 aveAveRuntime2 = mean(runtime2(:)) % overall average
 
-save log_results_experiment6b_isModified_true
+% save log_results_experiment7_isModified_true
 
 figure
 h = heatmap(outrateSet,etaSet,resultsPercentage);

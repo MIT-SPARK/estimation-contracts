@@ -13,7 +13,7 @@ addSpecificPaths
 %% set parameters for Monte Carlo runs
 Nset = [10 50 100 200]; % number of measurements
 outrateSet = [0 0.1 0.3 0.5 0.7 0.9]; % outlier rate
-nrTests = 5; % number of runs for each configuration
+nrTests = 10; % number of runs for each configuration
 isModifiedWahba = 0;
 
 alphaBar = 0.8;
