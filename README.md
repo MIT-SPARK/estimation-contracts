@@ -31,7 +31,9 @@ You can replicate the experiments in the paper by running each of the following 
 * **experiment4_hypercontractivity_bounds**: visualizes the bounds in Theorem 11 (Fig. 6 in the paper)
 * **experiment5_visualize_anticoncentration**: visualizes the functions involved in the definition of certifiable anti-concentration (Fig. 7 in the paper)
 * **experiment6_check_anticoncentration_synthetic_vs_n**: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper)
-* **experiment7_check_anticoncentration_synthetic_vs_eta**: check certifiable anti-concentration in synthetic rotation search problems for different values of the parameter $\eta$ (Fig. 8(a) and 8(c) in the paper)
+* **experiment7_check_anticoncentration_synthetic_vs_eta**: check certifiable anti-concentration in synthetic rotation search problems for different values of the parameter $\eta$, which obtains:
+  * Fig. 8(a) when the parameter ``isModified = 0``
+  * Fig. 8(c) when the parameter ``isModified = 0``
 * **experiment8_slide_synthetic**: evaluates SLIDE for list decodable regression in synthetic rotation search problems, which obtains:
   * Fig. 9 when the parameter ``isAdversarial = 0`` and ``recoverAllHypotheses = 0``
   * Fig. 10 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 0``
