@@ -31,7 +31,7 @@ isHyperContractive_results = zeros(length(dataFileNames),length(Ct_pow_t_set));
 timeTest_results = zeros(length(dataFileNames),length(Ct_pow_t_set));
 eta_results = zeros(length(dataFileNames),1);
 
-for fileInd=length(dataFileNames)
+for fileInd=1:length(dataFileNames)
     dataFileName = dataFileNames{fileInd}
     
     %% parse images to get real data
