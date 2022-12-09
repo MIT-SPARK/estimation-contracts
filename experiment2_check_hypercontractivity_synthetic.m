@@ -42,6 +42,8 @@ for ind_N = 1:length(Nset)
     end
 end
 
+%save log_results_experiment2
+
 %% plot/display results
 figure
 h = heatmap(Ct_pow_t_set,Nset,results);
@@ -65,7 +67,6 @@ h.NodeChildren(3).YAxis.Label.Interpreter = 'latex';
 h.NodeChildren(3).Title.Interpreter = 'latex';
 h.FontSize = 18;
 
-save log_results_experiment2
 
 
 
