@@ -231,7 +231,7 @@ if isAdversarial
         plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj2,2) ,':r','linewidth',4);
         plot_distribution_prctile(outrateSet(5:end),results_SLIDE_R_err_ang_deg_obj2(5:end,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
         plot_distribution_prctile(outrateSet(1:5),results_SLIDE_R_err_ang_deg_obj2(1:5,:)','color',[1 0 0],'Prctile',[25 50 75 90]);
-        plot_distribution_prctile(outrateSet,results_SLIDE_R_err_ang_deg_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
+        %plot_distribution_prctile(outrateSet,results_SLIDE_R_err_ang_deg_obj1','color',[1 0 0],'Prctile',[25 50 75 90]);
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj1,2) ,'-b','linewidth',4);
         plot(outrateSet, mean(results_TLS_R_err_ang_deg_obj2,2) ,':b','linewidth',4);
         plot(outrateSet, mean(results_SLIDE_R_err_ang_deg_obj1,2) ,'-r','linewidth',4);
