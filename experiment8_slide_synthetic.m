@@ -14,9 +14,9 @@ addSpecificPaths
 Nset = [50] % number of measurements
 outrateSet = [0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]; % outlier rate
 nrTests = 10; % number of runs for each configuration
-% isAdversarial = 0; recoverAllHypotheses = 0; % Fig. 9
-%isAdversarial = 1; recoverAllHypotheses = 0; % Fig. 10
- isAdversarial = 1; recoverAllHypotheses = 1; % Fig. 11
+isAdversarial = 0; recoverAllHypotheses = 0; % Fig. 9
+% isAdversarial = 1; recoverAllHypotheses = 0; % Fig. 10
+% isAdversarial = 1; recoverAllHypotheses = 1; % Fig. 11
 doPlotRotations = 0;
 
 %% parameters to visualize rotations out of SLIDE (Fig. 12)
@@ -115,13 +115,10 @@ for ind_N = 1:length(Nset) % general, but we test for a single N here
     end
 end
 
-save log_results_experiment8_isAdversarial_1_recoverAll_1
+clear image1 image2 image1Col image2Col panorama panoramaView warpedImage matchedPtsImg1 matchedPtsImg2 blender imgCell stackedImage mask I % to make file compact
+save log_results_experiment8_isAdversarial_0_recoverAll_0 
  
 %% plots
-% clear all 
-% close all
-% clc
-% load log_results_experiment7_isAdversarial_true
 s = [1:length(outrateSet)]; 
 outrateSet = outrateSet(s);
 margin = 0.02;

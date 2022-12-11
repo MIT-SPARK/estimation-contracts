@@ -48,7 +48,7 @@ for N_ind = 1:length(Nset)
     end
 end
 
-% save log_results_experiment6_eta_at_080 % good results for isModified = 1
+save log_results_experiment6
 
 %% plot/display results
 resultsPercentage = 100*sum(results,3)/nrTests;
