@@ -87,7 +87,7 @@ semilogy(outrateSet,2*sqrt(3) * ones(size(outrateSet)),'-.k','linewidth',4);
 ylim([1e-4 5e2])
 xlabel('Outlier rate ($\beta$)','interpreter','latex')
 ylabel('Estimation error ($\|x-x^\circ\|_2$)','interpreter','latex')
-legend('Actual error','bound-J','bound-5','trivial bound','Location', 'Best')
+legend('actual error','bound-J','bound-5','trivial bound','Location', 'Best')
 set(gca,'fontsize', 18)
 
 %% check tightness
