@@ -19,7 +19,7 @@ for i=1:length(alphaBarSet)
 end
 outrateSet = [0 0.1 0.3 0.5 0.7 0.9]; % outlier rate
 nrTests = 10; % number of runs for each configuration
-isModifiedWahba = 1;
+isModifiedWahba = 0;
 
 %% matrix storing results
 results = zeros(length(etaSet),length(outrateSet), nrTests); 
@@ -60,7 +60,7 @@ aveRuntime2 = mean(runtime2,3);
 aveAveRuntime1 = mean(runtime1(:)) % overall average
 aveAveRuntime2 = mean(runtime2(:)) % overall average
 
-save log_results_experiment7_isModified_1
+save log_results_experiment7_isModified_0
 
 figure
 h = heatmap(outrateSet,etaSet,resultsPercentage);
