@@ -25,19 +25,20 @@ After installing the dependencies and cloning this repo, the folder where you in
 # Running the code
 
 You can replicate the experiments in the paper by running each of the following experiments:
-* **experiment1_aposteriori_bounds_synthetic**: solves synthetic rotation search problems using [QUASAR](https://arxiv.org/pdf/1905.12536.pdf) and compares the estimation errors with the a posteriori bound developed in our paper (Fig. 4 in the paper)
-* **experiment2_check_hypercontractivity_synthetic**: check certifiable hypercontractivity in synthetic rotation search problems (Fig. 5 in the paper)
-* **experiment3_check_hypercontractivity_real**: check certifiable hypercontractivity in real rotation search problems arising in panorama stitching (Table 1 in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
+* **experiment1_aposteriori_bounds_synthetic**: solves synthetic rotation search problems using [QUASAR](https://arxiv.org/pdf/1905.12536.pdf) and compares the estimation errors with the a posteriori bound developed in our paper (Fig. 4 in the paper) (expected runtime: ~15 hours)
+* **experiment2_check_hypercontractivity_synthetic**: check certifiable hypercontractivity in synthetic rotation search problems (Fig. 5 in the paper) (expected runtime: ~1.5 hours)
+* **experiment3_check_hypercontractivity_real**: check certifiable hypercontractivity in real rotation search problems arising in panorama stitching (Table 1 in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing) 
+(expected runtime: ~0.5 hours)
 * **experiment4_hypercontractivity_bounds**: visualizes the bounds in Theorem 11 (Fig. 6 in the paper)
 * **experiment5_visualize_anticoncentration**: visualizes the functions involved in the definition of certifiable anti-concentration (Fig. 7 in the paper)
-* **experiment6_check_anticoncentration_synthetic_vs_n**: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper)
+* **experiment6_check_anticoncentration_synthetic_vs_n**: check certifiable anti-concentration in synthetic rotation search problems for different number of measurements (Fig. 8(b) in the paper) (expected runtime: ~55 hours)
 * **experiment7_check_anticoncentration_synthetic_vs_eta**: check certifiable anti-concentration in synthetic rotation search problems for different values of the parameter $\eta$, which obtains:
-  * Fig. 8(a) when the parameter ``isModified = 0``
-  * Fig. 8(c) when the parameter ``isModified = 0``
+  * Fig. 8(a) when the parameter ``isModified = 0`` (expected runtime: ~40 hours)
+  * Fig. 8(c) when the parameter ``isModified = 0`` (expected runtime: ~40 hours)
 * **experiment8_slide_synthetic**: evaluates SLIDE for list decodable regression in synthetic rotation search problems, which obtains:
-  * Fig. 9 when the parameter ``isAdversarial = 0`` and ``recoverAllHypotheses = 0``
-  * Fig. 10 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 0``
-  * Fig. 11 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 1``
+  * Fig. 9 when the parameter ``isAdversarial = 0`` and ``recoverAllHypotheses = 0`` (expected runtime: ~6 hours)
+  * Fig. 10 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 0`` (expected runtime: ~6 hours)
+  * Fig. 11 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 1`` (expected runtime: ~6 hours)
   * Fig. 12 when the parameter ``isAdversarial = 1`` and ``recoverAllHypotheses = 1`` (for some random instances of the problem, also stored in SLIDE_example1.mat and SLIDE_example2.mat)
 * **experiment9_check_anticoncentration_real**: check certifiable anti-concentration in real rotation search problems arising in panorama stitching (not reported in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
 
