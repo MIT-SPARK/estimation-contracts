@@ -13,7 +13,7 @@ The code has been implemented and tested in Matlab R2020a, using a Macbook Pro w
 To run the code, please install the following dependencies. Note: it is important to install all the dependencies in the same folder (e.g., all subfolders of a ``code`` folder):
 - [CVX with MOSEK](http://cvxr.com/cvx/doc/mosek.html) (tested with CVX Version 2.2)
 - [STRIDE and the Certifiably Robust Perception repository](https://github.com/MIT-SPARK/CertifiablyRobustPerception/) (tested with latest commit, December 10, 2022)
-- [SOSTOOLS](https://github.com/oxfordcontrol/SOSTOOLS) (tested with Version 3.01)
+- [SOSTOOLS](https://github.com/oxfordcontrol/SOSTOOLS) (tested with Version 3.01/master branch, but also runs with SOSTOOLS400 branch, which is typically faster)
 
 Clone our repo in the same folder as the other dependencies. 
 After installing the dependencies and cloning this repo, the folder where you installed the dependencies in should at least have the following sub-folders:
@@ -43,6 +43,7 @@ You can replicate the experiments in the paper by running each of the following 
 * **experiment9_check_anticoncentration_real**: check certifiable anti-concentration in real rotation search problems arising in panorama stitching (not reported in the paper). To run the real tests, please download the data from and put them in the **data** subfolder: [link to panorama stitching data](https://drive.google.com/drive/folders/1CppsDdU98PgG939aV0ZaaBcVYRLrgI9O?usp=sharing)
 
 The results we obtained by running the examples above are also stored in the **results** folder within this repo.
+Most results are obtained using SOSTOOLS v. 3.01, but we re-ran the experiments where we measured the runtime using the SOSTOOLS400 branch in SOSTOOLS, since the latter is typically faster. We store both sets of results and add a label *SOSTOOLS400* to the latter set of results.
 
 # Reference
 
